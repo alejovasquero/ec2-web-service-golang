@@ -109,7 +109,8 @@ func createNewEC2(stack awscdk.Stack, name string, props *ec2Props) awsec2.Insta
 			Shebang: jsii.String("#!/bin/bash\n" +
 				"sudo yum update -y\n" +
 				"sudo yum install -y golang git\n" +
-				"git clone https://github.com/alejovasquero/ec2-web-service-golang.git" +
+				"git clone https://github.com/alejovasquero/ec2-web-service-golang.git\n" +
+				"cd 'ec2-web-service-golang'\n" +
 				"go run cmd/app.go -v"),
 		}),
 		KeyName: jsii.String("Alejo_key_pair"),
