@@ -340,8 +340,18 @@ Resources:
         Fn::Base64: |-
           #!/bin/bash
           sudo yum update -y
-          sudo yum install -y golang git
-          git clone https://github.com/alejovasquero/ec2-web-service-golang.gitgo run cmd/app.go -v
+          sudo yum install -y golang git wget
+          cd ~
+          wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz
+          sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
+          export PATH=$PATH:/usr/local/go/bin
+          export GOCACHE=$HOME/.cache/go-build
+          echo $PATH
+          echo $GOCACHE
+          echo $HOME
+          git clone https://github.com/alejovasquero/ec2-web-service-golang.git
+          cd 'ec2-web-service-golang'
+          go run cmd/app.go -v
     Metadata:
       aws:cdk:path: EC2Stack/FirstVM/Resource
   CDKMetadata:

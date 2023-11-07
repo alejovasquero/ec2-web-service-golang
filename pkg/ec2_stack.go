@@ -108,7 +108,15 @@ func createNewEC2(stack awscdk.Stack, name string, props *ec2Props) awsec2.Insta
 		UserData: awsec2.UserData_ForLinux(&awsec2.LinuxUserDataOptions{
 			Shebang: jsii.String("#!/bin/bash\n" +
 				"sudo yum update -y\n" +
-				"sudo yum install -y golang git\n" +
+				"sudo yum install -y golang git wget\n" +
+				"cd ~\n" +
+				"wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz\n" +
+				"sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz\n" +
+				"export PATH=$PATH:/usr/local/go/bin\n" +
+				"export GOCACHE=$HOME/.cache/go-build\n" +
+				"echo $PATH\n" +
+				"echo $GOCACHE\n" +
+				"echo $HOME\n" +
 				"git clone https://github.com/alejovasquero/ec2-web-service-golang.git\n" +
 				"cd 'ec2-web-service-golang'\n" +
 				"go run cmd/app.go -v"),
