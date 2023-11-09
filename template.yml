@@ -354,6 +354,106 @@ Resources:
           go run cmd/app.go -v
     Metadata:
       aws:cdk:path: EC2Stack/FirstVM/Resource
+  SecondVMInstanceProfile8AE187DB:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - LabRole
+    Metadata:
+      aws:cdk:path: EC2Stack/SecondVM/InstanceProfile
+  SecondVM42A9FA55:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: ""
+      IamInstanceProfile:
+        Ref: SecondVMInstanceProfile8AE187DB
+      ImageId:
+        Fn::FindInMap:
+          - SecondVMAmiMap454528F7
+          - Ref: AWS::Region
+          - ami
+      InstanceType: t2.micro
+      KeyName: Alejo_key_pair
+      SecurityGroupIds:
+        - Fn::GetAtt:
+            - mysg143CED9A
+            - GroupId
+      SubnetId:
+        Ref: myvpcPublicSubnet1Subnet6BD75C12
+      Tags:
+        - Key: Name
+          Value: EC2Stack/SecondVM
+      UserData:
+        Fn::Base64: |-
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y golang git wget
+          cd ~
+          wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz
+          sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
+          export PATH=$PATH:/usr/local/go/bin
+          export GOCACHE=$HOME/.cache/go-build
+          echo $PATH
+          echo $GOCACHE
+          echo $HOME
+          git clone https://github.com/alejovasquero/ec2-web-service-golang.git
+          cd 'ec2-web-service-golang'
+          go run cmd/app.go -v
+    Metadata:
+      aws:cdk:path: EC2Stack/SecondVM/Resource
+  ThirdVMInstanceProfile3109F818:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - LabRole
+    Metadata:
+      aws:cdk:path: EC2Stack/ThirdVM/InstanceProfile
+  ThirdVM14E35DCE:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: ""
+      IamInstanceProfile:
+        Ref: ThirdVMInstanceProfile3109F818
+      ImageId:
+        Fn::FindInMap:
+          - ThirdVMAmiMap50D77EBB
+          - Ref: AWS::Region
+          - ami
+      InstanceType: t2.micro
+      KeyName: Alejo_key_pair
+      SecurityGroupIds:
+        - Fn::GetAtt:
+            - mysg143CED9A
+            - GroupId
+      SubnetId:
+        Ref: myvpcPublicSubnet1Subnet6BD75C12
+      Tags:
+        - Key: Name
+          Value: EC2Stack/ThirdVM
+      UserData:
+        Fn::Base64: |-
+          #!/bin/bash
+          sudo yum update -y
+          sudo yum install -y golang git wget
+          cd ~
+          wget https://go.dev/dl/go1.21.3.linux-amd64.tar.gz
+          sudo tar -C /usr/local -xzf go1.21.3.linux-amd64.tar.gz
+          export PATH=$PATH:/usr/local/go/bin
+          export GOCACHE=$HOME/.cache/go-build
+          echo $PATH
+          echo $GOCACHE
+          echo $HOME
+          git clone https://github.com/alejovasquero/ec2-web-service-golang.git
+          cd 'ec2-web-service-golang'
+          go run cmd/app.go -v
+    Metadata:
+      aws:cdk:path: EC2Stack/ThirdVM/Resource
   CDKMetadata:
     Type: AWS::CDK::Metadata
     Properties:
@@ -363,6 +463,12 @@ Resources:
     Condition: CDKMetadataAvailable
 Mappings:
   FirstVMAmiMap3D20FA58:
+    us-east-1:
+      ami: ami-05c13eab67c5d8861
+  SecondVMAmiMap454528F7:
+    us-east-1:
+      ami: ami-05c13eab67c5d8861
+  ThirdVMAmiMap50D77EBB:
     us-east-1:
       ami: ami-05c13eab67c5d8861
 Conditions:

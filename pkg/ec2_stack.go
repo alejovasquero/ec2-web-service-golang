@@ -61,6 +61,16 @@ func NewEC2Stack(scope constructs.Construct, id string, props *Ec2WebServiceGola
 		vpc:            vpc,
 		security_group: sg,
 	})
+	createNewEC2(stack, "SecondVM", &ec2Props{
+		role:           lab_role,
+		vpc:            vpc,
+		security_group: sg,
+	})
+	createNewEC2(stack, "ThirdVM", &ec2Props{
+		role:           lab_role,
+		vpc:            vpc,
+		security_group: sg,
+	})
 
 	return stack
 }
