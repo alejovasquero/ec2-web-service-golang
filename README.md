@@ -97,3 +97,7 @@ http://ec2-3-227-16-97.compute-1.amazonaws.com/hello
 ![DNS](img/SECOND.JPG)
 
 ![DNS](img/third.JPG)
+
+You can also server static content in this app.
+
+![Static content](img/STATIC.JPG)
