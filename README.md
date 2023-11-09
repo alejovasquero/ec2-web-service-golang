@@ -6,7 +6,7 @@ A simple web app automatically deployed into 3 EC2 instances.
 
 The architecture of this project is as follows.
 
-![Twitter Architecture](img/ARCHITECTURE.pnG)
+![Project architecture](img/ARCHITECTURE.png)
 
 - A internet consumer
 - 3 EC2 instances that have a simple golang server running in port 80 with HTTP
