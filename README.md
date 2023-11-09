@@ -15,12 +15,12 @@ The architecture of this project is as follows.
 
 - Docker
 - AWS
-- Visual studio dev containers plugin
+- Visual studio: dev containers plugin
 
 
 ## How to build the architecture
 
-Open the folder with dev containers and wait the container to start. The container has the following libraries:
+Open the folder with the dev containers plugin and wait the container to start. The container has the following libraries:
 - Golang 1.21.3 or major
 - AWS CDK
 - AWS CLI
