@@ -22,7 +22,6 @@ The architecture of this project is as follows.
 
 Open the folder with dev containers and wait the container to start. The container has the following libraries:
 - Golang 1.21.3 or major
-- Maven
 - AWS CDK
 - AWS CLI
 
